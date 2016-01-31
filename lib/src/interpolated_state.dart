@@ -1,39 +1,37 @@
 part of sync_ball;
 
-class InterpolatedState {
+class InterpolatedState implements State {
   List<State> _states = new List<State>();
   Interpolator _interpolator = new Hermit();
 
-  State _state;
+  State _state = new State(0.0, new List<Unit>());
+
+  double get time => _state.time;
+  List<Unit> get units => _state.units;
+
+  bool get isValid => _states.length > 3;
+
+  double get minTime => _states.elementAt(_states.length - 3).time;
+  double get maxTime => _states.elementAt(_states.length - 2).time;
 
   void pushState(State state){
     _states.add(state);
     if(_states.length > 4){
       _states.removeAt(0);
     }
-
-    _updateState();
   }
 
-  void _updateState(deltaTime){
-    State state;
-    _overallTime += delta;
-
+  void updateTime(double time){
     if(_states.length > 3){
-      state = _interpolateState(
-          _overallTime,
+      _state = _interpolateState(
+          time,
           _states.elementAt(_states.length - 4),
           _states.elementAt(_states.length - 3),
           _states.elementAt(_states.length - 2),
           _states.elementAt(_states.length - 1)
       );
-    } else if (_states.length > 0){
-      state = _states.last;
     }
-
-    _state = state;
   }
-
 
   Vector2 _interpolateVector2(Vector2 v1, Vector2 v2, Vector2 v3, Vector2 v4, double mu){
     return new Vector2(
@@ -60,4 +58,9 @@ class InterpolatedState {
 
     return new State(time, units);
   }
+
+  @override
+  Map toJson() => _state.toJson();
+
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

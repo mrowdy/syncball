@@ -7,9 +7,8 @@ void main() {
   InterpolatedServer iServer;
 
   setUp((){
-    Interpolator int = new Hermit();
     Clock clock = new Clock(3, new Duration(seconds: 0));
-    iServer = new InterpolatedServer(clock, int);
+    iServer = new InterpolatedServer(clock);
     iServer.pushState(new State(0.0, null));
   });
 

@@ -23,3 +23,5 @@ part "src/interpolated_state.dart";
 part "src/interpolator.dart";
 part "src/interpolators/hermit.dart";
 
+part "src/state_buffer.dart";
+

@@ -7,9 +7,9 @@ class PointServer implements Server {
 
   double _time = 0.0;
   Stopwatch _stopWatch = new Stopwatch();
-  Random _rand = new Random();
 
   Clock _clock;
+  Clock _internalClock = new InfiniteClock(new Duration(milliseconds: 16));
 
   List<Unit> _units = new List<Unit>();
 
@@ -19,15 +19,19 @@ class PointServer implements Server {
   PointServer(this._clock){
     _stopWatch.start();
     _createUnits();
-    _clock.onTick.listen((_) => _handleTick());
+    _clock.onTick.listen((_) => _send());
+    _internalClock.onTick.listen((_) => _update());
   }
 
-  void _handleTick(){
+  void _update(){
     double currentTime = _stopWatch.elapsedMilliseconds / 1000;
     double delta = currentTime - _time;
     _time = currentTime;
 
     _updateUnits(delta);
+  }
+
+  void _send(){
     _addState();
   }
 
@@ -43,7 +47,7 @@ class PointServer implements Server {
 
       unit.velocity = new Vector2(
           0.0,
-          50 + 10.0 * i
+          3.0 * i
       );
 
       _units.add(unit);
@@ -83,6 +87,8 @@ class PointServer implements Server {
 
   void _addState() {
     State state = new State.fromMap(JSON.decode(JSON.encode(new State(_time, _units))));
+    //print('server time: '  + _time.toString() );
+
     _onUpdate.add(state);
   }
 }
