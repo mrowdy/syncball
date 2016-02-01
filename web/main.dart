@@ -14,13 +14,13 @@ void main(){
   Clock renderClock = new FrameClock();
   Clock debounceClock = new InfiniteClock(new Duration(milliseconds: 16));
 
-  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 1000)));
+  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 200)));
 
   Screen screen = new CanvasScreen(canvas, renderClock);
-  InterpolatedServer iServer = new InterpolatedServer(debounceClock);
+  //InterpolatedServer iServer = new InterpolatedServer(debounceClock);
 
-  //server.onUpdate.listen(screen.pushState);
+  server.onUpdate.listen(screen.pushState);
 
-  server.onUpdate.listen(iServer.pushState);
-  iServer.onUpdate.listen(screen.pushState);
+  //server.onUpdate.listen(iServer.pushState);
+  //iServer.onUpdate.listen(screen.pushState);
 }

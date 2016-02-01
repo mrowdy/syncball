@@ -5,7 +5,7 @@ class StateBuffer {
   double _ttl;
   List<State> _states = new List<State>();
 
-  StateBuffer([this._ttl = 5.0]);
+  StateBuffer([this._ttl = 10.0]);
 
   void pushState(State state){
     _states.add(state);
@@ -23,7 +23,7 @@ class StateBuffer {
   int indexAtTime(double time) {
     int index = 0;
 
-    for(int i; i < _states.length; i++){
+    for(int i = 0; i < _states.length; i++){
       if(_states.elementAt(i).time > time){
         break;
       }
@@ -34,7 +34,11 @@ class StateBuffer {
   }
 
   State elementAt(int index){
-    if(index < 0 || index >= _states.length){
+    if(index < 0){
+      return _states.first;
+    }
+
+    if(index >= _states.length){
       return _states.last;
     }
 

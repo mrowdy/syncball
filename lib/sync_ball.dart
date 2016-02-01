@@ -25,3 +25,5 @@ part "src/interpolators/hermit.dart";
 
 part "src/state_buffer.dart";
 
+part "src/game.dart";
+

@@ -1,7 +1,7 @@
 part of sync_ball;
 
 class InterpolatedState implements State {
-  List<State> _states = new List<State>();
+  StateBuffer _stateBuffer;
   Interpolator _interpolator = new Hermit();
 
   State _state = new State(0.0, new List<Unit>());
@@ -9,28 +9,20 @@ class InterpolatedState implements State {
   double get time => _state.time;
   List<Unit> get units => _state.units;
 
-  bool get isValid => _states.length > 3;
-
-  double get minTime => _states.elementAt(_states.length - 3).time;
-  double get maxTime => _states.elementAt(_states.length - 2).time;
-
-  void pushState(State state){
-    _states.add(state);
-    if(_states.length > 4){
-      _states.removeAt(0);
-    }
-  }
+  InterpolatedState(this._stateBuffer);
 
   void updateTime(double time){
-    if(_states.length > 3){
-      _state = _interpolateState(
-          time,
-          _states.elementAt(_states.length - 4),
-          _states.elementAt(_states.length - 3),
-          _states.elementAt(_states.length - 2),
-          _states.elementAt(_states.length - 1)
-      );
-    }
+    int index = _stateBuffer.indexAtTime(time);
+
+    print(_stateBuffer.length.toString() + '----' + index.toString());
+    _state = _interpolateState(
+        time,
+        _stateBuffer.elementAt(index - 1),
+        _stateBuffer.elementAt(index),
+        _stateBuffer.elementAt(index + 1),
+        _stateBuffer.elementAt(index + 2)
+    );
+
   }
 
   Vector2 _interpolateVector2(Vector2 v1, Vector2 v2, Vector2 v3, Vector2 v4, double mu){
