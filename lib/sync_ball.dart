@@ -25,4 +25,5 @@ part "src/interpolators/hermit.dart";
 part "src/state_buffer.dart";
 
 part "src/game.dart";
-part "src/semi_fixed_timestep.dart";
+part "src/time_step.dart";
+part "package:syncball/src/time_steps/semi_fixed_timestep.dart";

@@ -1,6 +1,6 @@
 part of sync_ball;
 
-class SemiFixedTimestep {
+class SemiFixedTimestep implements TimeStep {
   double _alpha = 0.0;
   double _timeStep;
 

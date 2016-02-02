@@ -33,19 +33,19 @@ class Game {
     _state = _createState();
   }
 
+  Game.fromState(State state, {Clock clock: null}){
+    _getClock(clock);
+    _clock.onTick.listen(_tick);
+    _timeStep.onUpdate.listen(_update);
+    _state = state;
+  }
+
   void _getClock(Clock clock) {
        if(clock == null){
       _clock = new InfiniteClock(new Duration(milliseconds: 16));
     } else {
       _clock = clock;
     }
-  }
-
-  Game.fromState(State state, {Clock clock: null}){
-    _getClock(clock);
-    _clock.onTick.listen(_tick);
-    _timeStep.onUpdate.listen(_update);
-    _state = state;
   }
 
   List<Unit> _createUnits(int count) {
@@ -81,7 +81,7 @@ class Game {
   }
 
   void _update(double delta){
-    _state = new State(delta, _updateUnits(_state.units, delta));
+    _state = new State(_time, _updateUnits(_state.units, delta));
     _onUpdate.add(_state);
   }
 

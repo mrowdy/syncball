@@ -14,9 +14,6 @@ class InterpolatedState implements State {
   void updateTime(double time){
     int index = _stateBuffer.indexAtTime(time);
 
-    //print(_stateBuffer.length.toString() + '----' + index.toString());
-    print((_stateBuffer.elementAt(_stateBuffer.length -1).time - time).toStringAsFixed(4));
-
     _state = _interpolateState(
         time,
         _stateBuffer.elementAt(index - 1),
@@ -24,7 +21,6 @@ class InterpolatedState implements State {
         _stateBuffer.elementAt(index + 1),
         _stateBuffer.elementAt(index + 2)
     );
-
   }
 
   Vector2 _interpolateVector2(Vector2 v1, Vector2 v2, Vector2 v3, Vector2 v4, double mu){
@@ -53,7 +49,6 @@ class InterpolatedState implements State {
     return new State(time, units);
   }
 
-  @override
   Map toJson() => _state.toJson();
 
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);

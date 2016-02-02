@@ -5,7 +5,9 @@ class StateBuffer {
   double _ttl;
   List<State> _states = new List<State>();
 
-  StateBuffer([this._ttl = 10.0]);
+  StateBuffer({ttl: 0.0}){
+    _ttl = ttl;
+  }
 
   void pushState(State state){
     _states.add(state);

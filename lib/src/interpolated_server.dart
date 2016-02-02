@@ -4,32 +4,47 @@ class InterpolatedServer implements Server, Screen {
 
   Clock _clock;
   double _time = 0.0;
-  Duration _delay;
-
-  StateBuffer _stateBuffer = new StateBuffer();
-
-  StreamController _onUpdate = new StreamController<State>();
-  Stream<State> get onUpdate => _onUpdate.stream;
+  double _delay;
+  bool _isRunning = false;
 
   InterpolatedState _iState;
 
+  Stopwatch _stopwatch = new Stopwatch();
+  StateBuffer _stateBuffer = new StateBuffer(ttl: 10.0);
+  StreamController _onUpdate = new StreamController<State>();
+  Stream<State> get onUpdate => _onUpdate.stream;
+
   InterpolatedServer(this._clock, this._delay){
     _iState = new InterpolatedState(_stateBuffer);
-    _clock.onTick.listen(_update);
+    _clock.onTick.listen(_handleTick);
   }
 
   void pushState(State state){
     _stateBuffer.pushState(state);
   }
 
-  void _update(double delta){
-    if(_delay.inMilliseconds > 0){
-      _delay = new Duration(milliseconds: _delay.inMilliseconds - (delta * 1000).toInt());
+  void _handleTick(double delta){
+    _startDelayed(delta);
+
+    if(_isRunning){
+      _update();
+    }
+  }
+
+  void _startDelayed(double delta) {
+    if(_delay > 0){
+      _delay -= delta;
       return;
     }
 
-    _time = num.parse((_time + delta).toStringAsFixed(3));
-    _iState.updateTime(_time);
+    if(!_isRunning){
+      _stopwatch.start();
+      _isRunning = true;
+    }
+  }
+
+  void _update(){
+    _iState.updateTime(_stopwatch.elapsedMicroseconds / 1000000);
     _onUpdate.add(_iState);
   }
 }
