@@ -1,6 +1,7 @@
 library sync_ball;
 
 import "dart:async";
+import "dart:math";
 import "dart:convert";
 
 import "package:vector_math/vector_math.dart";

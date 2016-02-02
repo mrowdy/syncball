@@ -3,11 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .canvas {
+            width: 100%;
+            height: 50vh;
+            float: left;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
-<canvas id="server" width="600" height="600">canvas not supported</canvas>
-<canvas id="client" width="600" height="600">canvas not supported</canvas>
+<canvas id="server" class="canvas" width="100" height="100">canvas not supported</canvas>
+<canvas id="client" class="canvas" width="100" height="100">canvas not supported</canvas>
 
 <script type="application/dart" src="main.dart"></script>
 <script src="packages/browser/dart.js"></script>

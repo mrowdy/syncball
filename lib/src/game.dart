@@ -9,8 +9,8 @@ class Game {
   Stopwatch _stopwatch = new Stopwatch();
   double _time = 0.0;
 
-  double _worldWidth = 600.0;
-  double _worldHeight = 600.0;
+  double _worldWidth = 100.0;
+  double _worldHeight = 100.0;
 
   int _unitCount;
 
@@ -60,7 +60,7 @@ class Game {
 
       unit.velocity = new Vector2(
           0.0,
-          20.0 * i
+          5.0 * i
       );
 
       units.add(unit);
