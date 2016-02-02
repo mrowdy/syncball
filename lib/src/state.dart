@@ -12,8 +12,7 @@ class State {
 
   String toString(){
     return {
-      "time": _time,
-      "units": _units
+      "time": _time
     }.toString();
   }
 

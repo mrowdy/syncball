@@ -1,7 +1,6 @@
 library sync_ball;
 
 import "dart:async";
-import "dart:math";
 import "dart:convert";
 
 import "package:vector_math/vector_math.dart";
@@ -26,4 +25,4 @@ part "src/interpolators/hermit.dart";
 part "src/state_buffer.dart";
 
 part "src/game.dart";
-
+part "src/semi_fixed_timestep.dart";

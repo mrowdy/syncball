@@ -15,6 +15,11 @@ class PointServer implements Server {
   }
 
   void _send(){
-    _onUpdate.add(_game.state);
+    _onUpdate.add(new State.fromMap(
+        JSON.decode(JSON.encode(new State(
+            _game.state.time,
+            _game.state.units)
+        )))
+    );
   }
 }

@@ -19,7 +19,7 @@ class Clock {
 
   void _handleTick(Timer timer) {
     _count--;
-    _onTick.add(_interval.inSeconds.toDouble());
+    _onTick.add(_interval.inMilliseconds.toDouble() * 1000);
     if(_count <= 0){
       _timer.cancel();
     }

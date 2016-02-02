@@ -4,8 +4,7 @@ class InterpolatedServer implements Server, Screen {
 
   Clock _clock;
   double _time = 0.0;
-
-  double _delay = 0.200;
+  Duration _delay;
 
   StateBuffer _stateBuffer = new StateBuffer();
 
@@ -14,7 +13,7 @@ class InterpolatedServer implements Server, Screen {
 
   InterpolatedState _iState;
 
-  InterpolatedServer(this._clock){
+  InterpolatedServer(this._clock, this._delay){
     _iState = new InterpolatedState(_stateBuffer);
     _clock.onTick.listen(_update);
   }
@@ -24,12 +23,12 @@ class InterpolatedServer implements Server, Screen {
   }
 
   void _update(double delta){
-    if(_delay > 0){
-      _delay -= delta;
+    if(_delay.inMilliseconds > 0){
+      _delay = new Duration(milliseconds: _delay.inMilliseconds - (delta * 1000).toInt());
       return;
     }
 
-    _time += delta;
+    _time = num.parse((_time + delta).toStringAsFixed(3));
     _iState.updateTime(_time);
     _onUpdate.add(_iState);
   }

@@ -95,6 +95,12 @@ void main() {
       game = new Game(clock: new Clock(3, new Duration(milliseconds: 3)));
       expect(game.state.time, 0.0);
     });
+
+    test('it is possible to create game from state', (){
+      State state = new State(0.0, new List<Unit>());
+      game = new Game.fromState(state);
+      expect(game.state,state);
+    });
   });
 
   group("Streaming", () {

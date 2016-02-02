@@ -6,6 +6,10 @@ class Game {
   State _state;
   Clock _clock;
 
+  SemiFixedTimestep _timeStep = new SemiFixedTimestep(0.01);
+  Stopwatch _stopwatch = new Stopwatch();
+  double _time = 0.0;
+
   double _worldWidth = 600.0;
   double _worldHeight = 600.0;
 
@@ -22,14 +26,26 @@ class Game {
 
   Game({int units: 0, Clock clock: null}){
     _unitCount = units;
-    if(clock == null){
-      _clock = new InfiniteClock(new Duration(milliseconds: 10));
+    _getClock(clock);
+
+    _clock.onTick.listen(_tick);
+    _timeStep.onUpdate.listen(_update);
+    _state = _createState();
+  }
+
+  void _getClock(Clock clock) {
+       if(clock == null){
+      _clock = new InfiniteClock(new Duration(milliseconds: 16));
     } else {
       _clock = clock;
     }
+  }
 
-    _clock.onTick.listen(_update);
-    _state = _createState();
+  Game.fromState(State state, {Clock clock: null}){
+    _getClock(clock);
+    _clock.onTick.listen(_tick);
+    _timeStep.onUpdate.listen(_update);
+    _state = state;
   }
 
   List<Unit> _createUnits(int count) {
@@ -54,32 +70,43 @@ class Game {
     return units;
   }
 
-  void _update(double delta){
+  void _tick(double clockTime){
     if(!_isRunning || _isPaused){
       return;
     }
 
-    double time  = num.parse((delta + _state.time).toStringAsFixed(3));
-    _state = new State(time, _updateUnits(_state.units, delta));
+    double newTime = _stopwatch.elapsedMicroseconds / 1000000;
+    _timeStep.addTime(newTime - _time);
+    _time = newTime;
+  }
+
+  void _update(double delta){
+    _state = new State(delta, _updateUnits(_state.units, delta));
     _onUpdate.add(_state);
   }
 
   void start(){
     _isRunning = true;
     _isPaused = false;
+    _stopwatch.start();
   }
 
   void stop(){
     _isRunning = false;
     _isPaused = true;
     _state = _createState();
+    _stopwatch.stop();
+    _stopwatch.reset();
+    _time = 0.0;
   }
 
   void pause(){
+    _stopwatch.stop();
     _isPaused = true;
   }
 
   void resume(){
+    _stopwatch.start();
     _isPaused = false;
   }
 

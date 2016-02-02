@@ -10,17 +10,19 @@ part "canvas_screen.dart";
 part "frame_clock.dart";
 
 void main(){
+
   CanvasElement canvas = querySelector("#game") as CanvasElement;
-  Clock renderClock = new FrameClock();
-  Clock debounceClock = new InfiniteClock(new Duration(milliseconds: 16));
 
-  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 200)));
+  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 16)));
+  Screen screen = new CanvasScreen(canvas, new FrameClock());
 
-  Screen screen = new CanvasScreen(canvas, renderClock);
-  //InterpolatedServer iServer = new InterpolatedServer(debounceClock);
+//  InterpolatedServer iServer = new InterpolatedServer(
+//      new InfiniteClock(new Duration(milliseconds: 16)),
+//      new Duration(seconds: 5)
+//  );
 
   server.onUpdate.listen(screen.pushState);
 
-  //server.onUpdate.listen(iServer.pushState);
-  //iServer.onUpdate.listen(screen.pushState);
+//  server.onUpdate.listen(iServer.pushState);
+//  iServer.onUpdate.listen(screen.pushState);
 }
