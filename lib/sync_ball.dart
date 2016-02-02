@@ -10,6 +10,7 @@ part "src/unit.dart";
 
 part "src/clock.dart";
 part "src/clocks/infinite_clock.dart";
+part "src/clocks/limited_clock.dart";
 
 part "src/server.dart";
 part "src/servers/point_server.dart";

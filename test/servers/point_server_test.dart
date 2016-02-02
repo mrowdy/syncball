@@ -8,7 +8,7 @@ void main() {
 PointServer server;
 
   setUp(() {
-    Clock clock = new Clock(3, new Duration(seconds: 0));
+    Clock clock = new LimitedClock(3, new Duration(seconds: 0));
     server = new PointServer(clock);
   });
 

@@ -6,7 +6,7 @@ void main() {
 
   test('it provides ticks', (){
     int count = 5;
-    Clock clock = new Clock(count, new Duration(seconds: 0));
+    Clock clock = new LimitedClock(count, new Duration(seconds: 0));
     Stream<double> stream = clock.onTick;
     stream.listen(expectAsync((delta) {
       expect(delta is double, true);

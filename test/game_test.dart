@@ -19,49 +19,16 @@ void main() {
       expect(game.isRunning, false);
     });
 
-    test('it is paused when created', (){
-      expect(game.isPaused, true);
-    });
-
     test('it can be started', (){
       game.start();
       expect(game.isRunning, true);
     });
 
-    test('it is not paused after started', (){
-      game.start();
-      expect(game.isPaused, false);
-    });
 
     test('it is not running when it is stopped', (){
       game.start();
       game.stop();
       expect(game.isRunning, false);
-    });
-
-    test('it is paused when it is stopped', (){
-      game.start();
-      game.stop();
-      expect(game.isPaused, true);
-    });
-
-    test('it can be paused', (){
-      game.start();
-      game.pause();
-      expect(game.isPaused, true);
-    });
-
-    test('it can be resumed', (){
-      game.start();
-      game.pause();
-      game.resume();
-      expect(game.isPaused, false);
-    });
-
-    test('it is not stopped on pause', (){
-      game.start();
-      game.pause();
-      expect(game.isRunning, true);
     });
 
     test('it is possible to get the current state', (){
@@ -92,7 +59,7 @@ void main() {
     });
 
     test('its accepts custom clock', (){
-      game = new Game(clock: new Clock(3, new Duration(milliseconds: 3)));
+      game = new Game(clock: new LimitedClock(3, new Duration(milliseconds: 3)));
       expect(game.state.time, 0.0);
     });
 
@@ -104,47 +71,16 @@ void main() {
   });
 
   group("Streaming", () {
-    test('its uses clock for updateing when running', (){
-      game = new Game(clock: new Clock(3, new Duration(milliseconds: 3)));
-      game.onUpdate.listen(expectAsync((_){}, count: 3));
-      game.start();
-    });
-
     test('it does not update when game is not started', (){
-      game = new Game(clock: new Clock(3, new Duration(milliseconds: 3)));
+      game = new Game(clock: new LimitedClock(3, new Duration(milliseconds: 3)));
       game.onUpdate.listen(expectAsync((_){}, count: 0));
-    });
-
-    test('it does not update when game is paused', (){
-      game = new Game(clock: new Clock(3, new Duration(milliseconds: 3)));
-      game.onUpdate.listen(expectAsync((_){}, count: 0));
-      game.start();
-      game.pause();
-    });
-
-    test('it does update when game is resumed', (){
-      game = new Game(clock: new Clock(3, new Duration(milliseconds: 3)));
-      game.onUpdate.listen(expectAsync((_){}, count: 3));
-      game.start();
-      game.pause();
-      game.resume();
     });
 
     test('it does not update when game is stopped', (){
-      game = new Game(clock: new Clock(3, new Duration(milliseconds: 3)));
+      game = new Game(clock: new LimitedClock(3, new Duration(milliseconds: 3)));
       game.onUpdate.listen(expectAsync((_){}, count: 0));
       game.start();
       game.stop();
-    });
-  });
-
-  group('update', (){
-    test('its state updates time when running', (){
-      game = new Game(clock: new Clock(2, new Duration(milliseconds: 1000)));
-      game.start();
-      game.onUpdate.listen(expectAsync((state){
-        expect(state.time, 1.0);
-      }, count: 1));
     });
   });
 }

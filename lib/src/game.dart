@@ -2,7 +2,6 @@ part of sync_ball;
 
 class Game {
   bool _isRunning = false;
-  bool _isPaused = true;
   State _state;
   Clock _clock;
 
@@ -15,7 +14,6 @@ class Game {
 
   int _unitCount;
 
-  bool get isPaused => _isPaused;
   bool get isRunning => _isRunning;
   State get state => _state;
 
@@ -62,7 +60,7 @@ class Game {
 
       unit.velocity = new Vector2(
           0.0,
-          3.0 * i
+          20.0 * i
       );
 
       units.add(unit);
@@ -71,7 +69,7 @@ class Game {
   }
 
   void _tick(double clockTime){
-    if(!_isRunning || _isPaused){
+    if(!_isRunning){
       return;
     }
 
@@ -87,27 +85,15 @@ class Game {
 
   void start(){
     _isRunning = true;
-    _isPaused = false;
     _stopwatch.start();
   }
 
   void stop(){
     _isRunning = false;
-    _isPaused = true;
     _state = _createState();
     _stopwatch.stop();
     _stopwatch.reset();
     _time = 0.0;
-  }
-
-  void pause(){
-    _stopwatch.stop();
-    _isPaused = true;
-  }
-
-  void resume(){
-    _stopwatch.start();
-    _isPaused = false;
   }
 
   List<Unit> _updateUnits(List<Unit> units, double delta) {

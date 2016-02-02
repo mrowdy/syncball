@@ -1,7 +1,7 @@
 part of client;
 
 class FrameClock implements Clock {
-  StreamController<double> _onTick = new StreamController();
+  StreamController<double> _onTick = new StreamController.broadcast();
   Stream<double> get onTick => _onTick.stream;
 
   FrameClock(){
