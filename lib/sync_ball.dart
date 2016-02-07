@@ -6,26 +6,26 @@ import "dart:convert";
 
 import "package:vector_math/vector_math.dart";
 
-part "src/state.dart";
-part "src/unit.dart";
+part "sync_ball/state.dart";
+part "sync_ball/unit.dart";
 
-part "src/clock.dart";
-part "src/clocks/infinite_clock.dart";
-part "src/clocks/limited_clock.dart";
+part "sync_ball/clock.dart";
+part "sync_ball/clocks/infinite_clock.dart";
+part "sync_ball/clocks/limited_clock.dart";
 
-part "src/server.dart";
-part "src/servers/point_server.dart";
+part "sync_ball/server.dart";
+part "sync_ball/servers/point_server.dart";
 
-part "src/screen.dart";
+part "sync_ball/screen.dart";
 
-part "src/interpolated_server.dart";
-part "src/interpolated_state.dart";
+part "sync_ball/interpolated_server.dart";
+part "sync_ball/interpolated_state.dart";
 
-part "src/interpolator.dart";
-part "src/interpolators/hermit.dart";
+part "sync_ball/interpolator.dart";
+part "sync_ball/interpolators/hermit.dart";
 
-part "src/state_buffer.dart";
+part "sync_ball/state_buffer.dart";
 
-part "src/game.dart";
-part "src/time_step.dart";
-part "package:syncball/src/time_steps/semi_fixed_timestep.dart";
+part "sync_ball/game.dart";
+part "sync_ball/time_step.dart";
+part "sync_ball/time_steps/semi_fixed_timestep.dart";

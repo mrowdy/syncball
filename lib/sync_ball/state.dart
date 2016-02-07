@@ -18,7 +18,7 @@ class State {
 
   Map toJson() => {
     "time": _time,
-    "units": _units
+    "units": _units,
   };
 
   State.fromMap(Map map){

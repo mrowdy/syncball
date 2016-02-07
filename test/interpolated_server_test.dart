@@ -28,10 +28,4 @@ void main() {
   test('it provides a State stream', (){
     Stream<State> stream = iServer.onUpdate;
   });
-
-  test('it streams updated based on clock', (){
-//    iServer.onUpdate.listen(expectAsync((State state){
-//      expect(state is State, true);
-//    }, count: 3));
-  });
 }
