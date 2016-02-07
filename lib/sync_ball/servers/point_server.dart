@@ -6,11 +6,10 @@ class PointServer implements Server {
   Stream<State> get onUpdate => _onUpdate.stream;
 
   Clock _clock;
-  Game _game;
+  Box2dGame _game;
 
   PointServer(this._clock){
-    _game = new Game(units: 20, clock: _clock);
-    _game.start();
+    _game = new Box2dGame(units: 20, clock: _clock);
     _clock.onTick.listen((_) => _send());
   }
 

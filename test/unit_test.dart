@@ -1,4 +1,3 @@
-import "dart:async";
 import "package:test/test.dart";
 import "package:syncball/sync_ball.dart";
 import 'package:vector_math/vector_math.dart';

@@ -1,7 +1,6 @@
 import "dart:html" hide Screen;
 import "package:syncball/sync_ball.dart";
 import "package:syncball/client.dart";
-import 'dart:async';
 
 void main(){
   Server server = createServer();
@@ -21,7 +20,7 @@ Server createServer() {
   return server;
 }
 
-Game createClient(Server server) {
+void createClient(Server server) {
   Screen screen = new CanvasScreen(
       querySelector("#client"),
       new FrameClock()

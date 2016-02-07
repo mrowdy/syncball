@@ -23,7 +23,7 @@ Server createServer() {
   return server;
 }
 
-Game createClient(Server server) {
+void createClient(Server server) {
   Screen screen = new CanvasScreen(
       querySelector("#client"),
       new FrameClock()

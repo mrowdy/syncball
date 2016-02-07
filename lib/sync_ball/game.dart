@@ -1,6 +1,6 @@
 part of sync_ball;
 
-class Game {
+class Game implements GameInterface {
   bool _isRunning = false;
   State _state;
   Clock _clock;

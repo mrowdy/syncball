@@ -2,7 +2,7 @@ import "package:syncball/sync_ball.dart";
 
 main(List<String> args) {
 
-  Clock clock = new Clock(5, new Duration(milliseconds: 1000));
+  Clock clock = new InfiniteClock(new Duration(milliseconds: 1000));
 
   Game game = new Game(clock: clock);
   game.start();

@@ -1,10 +1,10 @@
 library sync_ball;
 
 import "dart:async";
-import "dart:math";
 import "dart:convert";
+import "dart:math";
 
-import "package:vector_math/vector_math.dart";
+import "package:box2d/box2d.dart" hide Timer;
 
 part "sync_ball/state.dart";
 part "sync_ball/unit.dart";
@@ -26,6 +26,8 @@ part "sync_ball/interpolators/hermit.dart";
 
 part "sync_ball/state_buffer.dart";
 
+part "sync_ball/game_interface.dart";
 part "sync_ball/game.dart";
+part "sync_ball/box2d_game.dart";
 part "sync_ball/time_step.dart";
 part "sync_ball/time_steps/semi_fixed_timestep.dart";

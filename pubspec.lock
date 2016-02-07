@@ -17,6 +17,10 @@ packages:
     description: barback
     source: hosted
     version: "0.15.2+7"
+  box2d:
+    description: box2d
+    source: hosted
+    version: "0.2.0"
   charcode:
     description: charcode
     source: hosted

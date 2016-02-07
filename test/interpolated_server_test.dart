@@ -1,5 +1,4 @@
 import "package:test/test.dart";
-import "dart:async";
 import "package:syncball/sync_ball.dart";
 
 void main() {
@@ -26,6 +25,6 @@ void main() {
   });
 
   test('it provides a State stream', (){
-    Stream<State> stream = iServer.onUpdate;
+    iServer.onUpdate;
   });
 }

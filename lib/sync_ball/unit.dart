@@ -3,7 +3,7 @@ part of sync_ball;
 class Unit {
   Vector2 position = new Vector2.zero();
   Vector2 velocity = new Vector2.zero();
-  double size = 10.0;
+  double size = 1.0;
   int id;
 
   Unit(this.id);
