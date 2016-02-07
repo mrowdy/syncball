@@ -4,6 +4,8 @@ class DummyGame implements Game{
   State _state;
   Clock _clock;
 
+  Random rand = new Random();
+
   SemiFixedTimestep _timeStep = new SemiFixedTimestep(0.01);
   Stopwatch _stopwatch = new Stopwatch();
   double _time = 0.0;
@@ -55,7 +57,7 @@ class DummyGame implements Game{
 
     for(int i = 1; i <= count; i++) {
       Unit unit = new Unit(i);
-      unit.size = 5.0;
+      unit.size = rand.nextDouble() * 3 + 1;
 
       unit.position = new Vector2(
           _worldWidth / count * i - _worldWidth / count / 2,
@@ -63,8 +65,8 @@ class DummyGame implements Game{
       );
 
       unit.velocity = new Vector2(
-          0.0,
-          5.0 * i
+          20.0 * (rand.nextDouble() - 1.0 ),
+          20.0 * (rand.nextDouble() - 1.0 )
       );
 
       units.add(unit);

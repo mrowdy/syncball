@@ -9,7 +9,7 @@ class DummyServer implements Server {
   Game _game;
 
   DummyServer(this._clock){
-    _game = new DummyGame(units: 20, clock: _clock);
+    _game = new DummyGame(units: 10, clock: _clock);
     _clock.onTick.listen((_) => _send());
   }
 
