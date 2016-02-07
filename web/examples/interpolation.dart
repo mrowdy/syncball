@@ -6,9 +6,8 @@ import 'dart:async';
 void main(){
   Server server = createServer();
 
-  new Timer(new Duration(seconds: 3), () {
-    createClient(server);
-  });
+  createClient(server);
+
 }
 
 Server createServer() {
@@ -17,9 +16,8 @@ Server createServer() {
       new FrameClock()
   );
 
-  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 16)));
+  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 100)));
   server.onUpdate.listen(screen.pushState);
-
   return server;
 }
 
@@ -29,7 +27,11 @@ Game createClient(Server server) {
       new FrameClock()
   );
 
-  Game game = new Game.fromState(server.state);
-  game.onUpdate.listen(screen.pushState);
-  game.start();
+  InterpolatedServer iServer = new InterpolatedServer(
+      new InfiniteClock(new Duration(milliseconds: 16)),
+      0.300
+  );
+
+  server.onUpdate.listen(iServer.pushState);
+  iServer.onUpdate.listen(screen.pushState);
 }
