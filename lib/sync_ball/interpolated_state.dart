@@ -4,7 +4,7 @@ class InterpolatedState implements State {
   StateBuffer _stateBuffer;
   Interpolator _interpolator = new Hermit();
 
-  State _state = new State(0.0, new List<Unit>());
+  State _state = new DummyState(0.0, new List<Unit>());
 
   double get time => _state.time;
   List<Unit> get units => _state.units;
@@ -46,7 +46,7 @@ class InterpolatedState implements State {
       units.add(_interpolateUnit(s1.units[i], s2.units[i], s3.units[i], s4.units[i], mu));
     }
 
-    return new State(time, units);
+    return new DummyState(time, units);
   }
 
   Map toJson() => _state.toJson();

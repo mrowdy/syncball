@@ -1,5 +1,9 @@
 part of sync_ball;
 
-class Screen {
+abstract class Screen {
+
+  /**
+   * Push a new state for rendering
+   */
   void pushState(State state){}
 }

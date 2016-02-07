@@ -1,34 +1,34 @@
 part of sync_ball;
 
-class State {
+abstract class State {
 
-  double _time;
-  List<Unit> _units = new List<Unit>();
+  /**
+   * Build state with time and units
+   */
+  State(double time, List<Unit> units);
 
-  State(this._time, this._units);
+  /**
+   * Get time of this state
+   */
+  double get time;
 
-  double get time => _time;
-  List<Unit> get units => _units;
+  /**
+   * Get list of units
+   */
+  List<Unit> get units;
 
-  String toString(){
-    return {
-      "time": _time
-    }.toString();
-  }
+  /**
+   * Convert state to json
+   */
+  Map toJson();
 
-  Map toJson() => {
-    "time": _time,
-    "units": _units,
-  };
+  /**
+   * Build a state from a map (json to state)
+   */
+  State.fromMap(Map map);
 
-  State.fromMap(Map map){
-    _time = map['time'];
-    map['units'].forEach((Map unitMap){
-      _units.add(new Unit.fromMap(unitMap));
-    });
-  }
-
-  State clone(){
-    return new State.fromMap(JSON.decode(JSON.encode(this)));
-  }
+  /**
+   * Clone this state
+   */
+  State clone();
 }

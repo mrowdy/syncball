@@ -20,7 +20,7 @@ class DummyGame implements Game{
   StreamController<State> _onUpdate = new StreamController();
   Stream<State> get onUpdate => _onUpdate.stream;
 
-  State _createState() => new State(0.0, _createUnits(_unitCount));
+  State _createState() => new DummyState(0.0, _createUnits(_unitCount));
 
   DummyGame({int units: 0, Clock clock: null}){
     _unitCount = units;
@@ -81,7 +81,7 @@ class DummyGame implements Game{
   }
 
   void _update(double delta){
-    _state = new State(_time, _updateUnits(_state.units, delta));
+    _state = new DummyState(_time, _updateUnits(_state.units, delta));
     _onUpdate.add(_state);
   }
 

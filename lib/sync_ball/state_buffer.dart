@@ -1,6 +1,6 @@
 part of sync_ball;
 
-class StateBuffer {
+class StateBuffer implements TimeBuffer {
 
   double _ttl;
   List<State> _states = new List<State>();
