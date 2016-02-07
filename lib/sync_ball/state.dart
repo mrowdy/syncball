@@ -27,4 +27,8 @@ class State {
       _units.add(new Unit.fromMap(unitMap));
     });
   }
+
+  State clone(){
+    return new State.fromMap(JSON.decode(JSON.encode(this)));
+  }
 }

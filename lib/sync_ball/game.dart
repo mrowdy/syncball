@@ -38,6 +38,10 @@ class Game {
     _state = state;
   }
 
+  void pushState(State state){
+    _state = state.clone();
+  }
+
   void _getClock(Clock clock) {
        if(clock == null){
       _clock = new InfiniteClock(new Duration(milliseconds: 16));
