@@ -15,7 +15,7 @@ Server createServer() {
       new FrameClock()
   );
 
-  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 100)));
+  Server server = new DummyServer(new InfiniteClock(new Duration(milliseconds: 100)));
   server.onUpdate.listen(screen.pushState);
   return server;
 }

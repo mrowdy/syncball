@@ -14,7 +14,7 @@ Server createServer() {
       new FrameClock()
   );
 
-  Server server = new PointServer(new InfiniteClock(new Duration(milliseconds: 70)));
+  Server server = new DummyServer(new InfiniteClock(new Duration(milliseconds: 70)));
   server.onUpdate.listen(screen.pushState);
   return server;
 }
@@ -25,9 +25,7 @@ void createClient(Server server) {
       new FrameClock()
   );
 
-  Game game = new Game.fromState(server.state);
+  DummyGame game = new DummyGame.fromState(server.state);
   game.onUpdate.listen(screen.pushState);
-  game.start();
-
   server.onUpdate.listen(game.pushState);
 }
