@@ -1,6 +1,7 @@
 part of sync_ball;
 
-class Server {
-  StreamController _onUpdate = new StreamController<State>();
-  Stream<State> get onUpdate => _onUpdate.stream;
+abstract class Server {
+  StreamController _onUpdate;
+  Stream<State> get onUpdate;
+  State get state;
 }

@@ -22,4 +22,6 @@ class PointServer implements Server {
         )))
     );
   }
+
+  State get state => _game.state;
 }
