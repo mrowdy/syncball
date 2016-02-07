@@ -47,4 +47,6 @@ class InterpolatedServer implements Server, Screen {
     _iState.updateTime(_stopwatch.elapsedMicroseconds / 1000000);
     _onUpdate.add(_iState);
   }
+
+  State get state => _iState;
 }
